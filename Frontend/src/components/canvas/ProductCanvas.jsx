@@ -34,9 +34,11 @@ export default function ProductCanvas() {
         {/* Enables user interaction (rotate, pan, zoom) */}
         <OrbitControls
           enablePan={false} // Stops the user from dragging the shirt off-screen
-          enableZoom={true}
+          enableZoom={false}
           minDistance={1} // Restricts zooming too close
           maxDistance={4} // Restricts zooming too far out
+          minPolarAngle={Math.PI / 2} // Locks vertical rotation at the horizon line
+          maxPolarAngle={Math.PI / 2}
         />
       </Canvas>
     </div>
