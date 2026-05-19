@@ -1,9 +1,24 @@
-import React from "react";
+import React, { useContext, useState } from "react";
 import { Canvas } from "@react-three/fiber";
 import { OrbitControls, Center, Stage } from "@react-three/drei";
-import Model from "./Model";
+
+import HoodiesShirt from "../../Models/HODIES SHIRTS";
+import Hoodies from "../../Models/HODIES";
+import PoloShirt from "../../Models/POLO SHIRTS";
+import PullOverLongSleeve from "../../Models/PULL OVER LONG SLEEVES";
+import SleevelessHodies from "../../Models/SLEEVELESS HODIES";
+import { BuilderDataContext } from "../../../Store/Builder.context";
 
 export default function ProductCanvas() {
+  const availableModels = {
+    Hodies_shirt: <HoodiesShirt />,
+    Hodies: <Hoodies />,
+    Polo_shirt: <PoloShirt />,
+    PullOverLongSleeve: <PullOverLongSleeve />,
+    SleevelessHodies: <SleevelessHodies />,
+  };
+
+  const { activeModel } = useContext(BuilderDataContext);
   return (
     <div className="w-full h-screen bg-gray-100">
       <Canvas
@@ -26,9 +41,7 @@ export default function ProductCanvas() {
           intensity={0.6}
           contactShadow={{ blur: 2, opacity: 0.5 }}
         >
-          <Center>
-            <Model />
-          </Center>
+          <Center>{availableModels[activeModel]}</Center>
         </Stage>
 
         {/* Enables user interaction (rotate, pan, zoom) */}
